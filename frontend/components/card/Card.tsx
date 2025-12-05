@@ -1,16 +1,20 @@
 import conditional_renderer from ".../conditional_render";
 import Image from "next/image";
+import { getCategory } from "@/fetch";
+import { getStrapiMedia } from "@/lib/strapi";
 import Button from "../button/Button";
 import styles from "./card.module.sass";
 import getCategoryColor from "./getcategorycolor";
-
-export default function card(props) {
+export default async function card(props) {
+  const cats = await getCategory("");
+  const matchedCategory = cats.find((cat) => cat.name == props.label);
+  const img = getStrapiMedia(matchedCategory.FeaturedImage.url);
   return (
     <div className={`${styles.card_wrap} ${props.className || ""}`}>
       <div className={styles.card}>
         <div className={styles.card_imageWrap}>
           <div className={styles.card_image}>
-            <Image src="/tech.jpg" alt="tech" fill={true} />
+            <Image src={img} alt="tech" fill={true} unoptimized />
           </div>
         </div>
         <div className={styles.card_content}>

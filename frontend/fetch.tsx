@@ -13,22 +13,12 @@ async function fetchFromStrapi<T>(
   return data;
 }
 
-// Get all posts (with populated relations)
-export async function getAllPosts(): Promise<Post[]> {
-  const data = await fetchFromStrapi(
-    "articles?populate=*&sort=publishedAt:desc",
-    PostsResponseSchema,
-  );
-  return data.data;
-}
-
-// Get single post by slug
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const data = await fetchFromStrapi(
     `articles?filters[slug][$eq]=${slug}&populate=*`,
     PostsResponseSchema,
   );
-  return data.data[0] || null;
+  return data.data;
 }
 
 export async function getPosts(params): Promise<Post[]> {
@@ -36,6 +26,13 @@ export async function getPosts(params): Promise<Post[]> {
     `articles?${params}&populate=*`,
     PostsResponseSchema,
   );
-  console.log(data.data);
+  return data.data;
+}
+
+export async function getCategory(params): Promise<Post[]> {
+  const data = await fetchFromStrapi(
+    `categories?${params}&populate=*`,
+    PostsResponseSchema,
+  );
   return data.data;
 }

@@ -1,3 +1,4 @@
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 import Card from "../components/card/Card";
 import { getPosts } from "../fetch";
 
@@ -6,32 +7,30 @@ export default async function Page() {
     await getPosts("filters[IsFeatured][$eq]=true"),
     await getPosts("filters[IsFeatured][$eq]=false"),
   ]);
-  await getPosts("filters[IsFeatured][$eq]=true");
 
   return (
     <div className="container pb-80">
-      <Card
-        label="Tech"
-        title="yaboha"
-        summary="keseh boha bravo"
-        href="#"
-        className="mb-30"
-      />
+      {featuredPosts.map((featuredPost) => (
+        <Card
+          key={featuredPost.id}
+          label={featuredPost.category.name}
+          title={featuredPost.title}
+          summary={featuredPost.description}
+          href={featuredPost.slug}
+          className="mb-30"
+        />
+      ))}
       <div className="row">
-        <div className="col col-4">
-          <Card label="Front-end" title="yaboha" summary="k" href="#" />
-        </div>
-        <div className="col col-4">
-          <Card label="Back-end" title="yaboha" summary="keseh boha" href="#" />
-        </div>
-        <div className="col col-4">
-          <Card
-            label="Front-end"
-            title="yaboha"
-            summary="keseh boha"
-            href="#"
-          />
-        </div>
+        {Posts.map((Post) => (
+          <div className="col col-4" key={Post.id}>
+            <Card
+              label={Post.category.name}
+              title={Post.title}
+              summary={Post.description}
+              href={Post.slug}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
