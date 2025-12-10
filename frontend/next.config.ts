@@ -10,8 +10,8 @@ const nextConfig = {
       },
       // For production:
       {
-        protocol: "https",
-        hostname: "your-strapi-domain.com",
+        protocol: "http",
+        hostname: "vitriolic-verlene-histographic.ngrok-free.dev",
         pathname: "/uploads/**",
       },
     ],

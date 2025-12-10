@@ -1,7 +1,7 @@
 import type { z } from "zod";
 import { type Post, PostsResponseSchema } from "./strapitypes";
 
-const STRAPI_URL = "http://localhost:1337";
+const STRAPI_URL = process.env.STRAPI_URL || "http://localhost:1337";
 async function fetchFromStrapi<T>(
   path: string,
   schema: z.ZodType<T>,
