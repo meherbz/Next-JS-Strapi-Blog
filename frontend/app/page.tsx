@@ -28,6 +28,7 @@ export default async function Page() {
                             title={Post.title}
                             summary={Post.description}
                             href={Post.slug}
+                            className="mb-30"
                         />
                     </div>
                 ))}
