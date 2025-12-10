@@ -1,4 +1,4 @@
-const categoryColorMap: Map = new Map();
+const categoryColorMap: Map<string, string> = new Map();
 categoryColorMap.set("Tech", "orange");
 categoryColorMap.set("Back-end", "green");
 categoryColorMap.set("Front-end", "purple");
